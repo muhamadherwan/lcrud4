@@ -18,7 +18,7 @@ class CreateEmployeesTable extends Migration
             $table->string('nama');
             $table->enum('jantina',['lelaki','perempuan']);
             $table->bigInteger('telefon');
-            $table->string('foto');
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }
