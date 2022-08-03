@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\EmployeeController;
 
+use App\Models\Employee;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +18,10 @@ use App\Http\Controllers\EmployeeController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $jumlahpegawai = Employee::count();
+    $jumlahpegawailelaki = Employee::where('jantina','lelaki')->count();
+    $jumlahpegawaiperempuan = Employee::where('jantina','perempuan')->count();
+    return view('welcome', compact('jumlahpegawai', 'jumlahpegawailelaki', 'jumlahpegawaiperempuan'));
 });
 
 Route::get('/pegawai', [EmployeeController::class, 'index'])->name('pegawai');
