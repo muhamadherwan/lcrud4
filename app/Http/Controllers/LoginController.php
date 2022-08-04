@@ -32,7 +32,7 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect('login');
+        return redirect('login  ');
     }
 
     public function register()

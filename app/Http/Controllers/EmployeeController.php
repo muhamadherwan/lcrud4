@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Models\Employee;
 
+use Illuminate\Validation\Rule;
+
+use Illuminate\Support\Facades\Session;
+
 class EmployeeController extends Controller
 {
     /**
@@ -19,6 +23,8 @@ class EmployeeController extends Controller
             $data = Employee::where('nama', 'LIKE', '%' .$request->search.'%')->paginate(5);
         } else {
             $data = Employee::paginate(5);
+            // set the current page url in session
+            Session::put('halaman_url', request()->fullurl());
         }
         
         return view('datapegawai', compact('data'));
@@ -44,6 +50,17 @@ class EmployeeController extends Controller
     public function insertdata(Request $request)
     {
         // dd($request->all());
+
+        $this->validate( $request,[
+            'nama' => 'required|min:7|max:20',
+            'jantina' => [
+                'required',
+                Rule::notIn(['0']),
+            ],            
+            'telefon' => 'required',
+        ]);
+
+
         $data = Employee::create($request->all());
 
         $request->validate([
@@ -65,7 +82,7 @@ class EmployeeController extends Controller
             $request->foto->storeAs('public/images',$data->foto);
         }
 
-        return redirect()->route('pegawai')
+         return redirect()->route('pegawai')
         ->with('success', 'Pegawai baru telah didaftarkan.');
 
     }
@@ -82,6 +99,12 @@ class EmployeeController extends Controller
     {
         $data = Employee::find($id);
         $data->update($request->all());
+        
+        if ( session('halaman_url')) {
+            return redirect(session('halaman_url'))
+            ->with('success', 'Pegawai baru telah didaftarkan.');
+        }
+
         return redirect()->route('pegawai')
         ->with('success', 'Data telah dikemaskini.');
     }

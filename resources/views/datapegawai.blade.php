@@ -30,6 +30,7 @@
         <div class="container">
         <div class="mb-2">
             <a href="{{ route('tambahpegawai') }}" class="btn btn-success">Tambah +</a>             
+            <!-- {{ Session::get('halaman_url') }} -->
         </div>
 
         <div class="row g-3 align-items-center mt-2">

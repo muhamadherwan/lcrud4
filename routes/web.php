@@ -26,13 +26,21 @@ Route::get('/', function () {
     return view('welcome', compact('jumlahpegawai', 'jumlahpegawailelaki', 'jumlahpegawaiperempuan'));
 });
 
-Route::get('/pegawai', [EmployeeController::class, 'index'])->name('pegawai')->middleware('auth');
+Route::group(['middleware' => ['auth', 'hakakses:admin']], function(){
 
-Route::get('/tambahpegawai', [EmployeeController::class, 'tambahpegawai'])->name('tambahpegawai')->middleware('auth');
+    Route::get('/pegawai', [EmployeeController::class, 'index'])->name('pegawai');
+    Route::get('/tambahpegawai', [EmployeeController::class, 'tambahpegawai'])->name('tambahpegawai');
+    Route::get('/tampilkandata/{id}', [EmployeeController::class, 'tampilkandata'])->name('tampilkandata');
+
+});
+
+// Route::get('/pegawai', [EmployeeController::class, 'index'])->name('pegawai')->middleware('auth');
+
+// Route::get('/tambahpegawai', [EmployeeController::class, 'tambahpegawai'])->name('tambahpegawai')->middleware('auth');
 
 Route::post('/insertdata', [EmployeeController::class, 'insertdata'])->name('insertdata');
 
-Route::get('/tampilkandata/{id}', [EmployeeController::class, 'tampilkandata'])->name('tampilkandata')->middleware('auth');
+// Route::get('/tampilkandata/{id}', [EmployeeController::class, 'tampilkandata'])->name('tampilkandata')->middleware('auth');
 
 Route::put('/updatedata/{id}', [EmployeeController::class,'updatedata'])->name('updatedata');
 

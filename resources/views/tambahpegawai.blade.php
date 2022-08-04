@@ -14,20 +14,29 @@
                         <div class="mb-3">
                             <label for="nama" class="form-label">Nama</label>
                             <input type="text" class="form-control" id="nama" name="nama">
+                            @error('nama')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         
                         <div class="mb-3">
                             <label for="jantina" class="form-label">Jantina</label>
                             <select class="form-select" name="jantina">
-                                <option selected>Pilih Jantina</option>
+                                <option value="0" selected>Pilih Jantina</option>
                                 <option value="lelaki">Lelaki</option>
                                 <option value="perempuan">Perempuan</option>
                             </select>
+                            @error('jantina')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="telefon" class="form-label">Telefon</label>
                             <input type="number" class="form-control" id="telefon" name="telefon">
+                            @error('telefon')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
