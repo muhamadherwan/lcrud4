@@ -32,6 +32,29 @@
                         </div>
 
                         <div class="mb-3">
+                            <label for="jantina" class="form-label">Agama</label>
+                            <select class="form-select" name="id_religions">
+                                <option value="0" selected>Pilih Agama</option>
+                                
+                                @foreach($dataagama as $data)
+                                <option value="{{ $data->id }}"> {{$data->nama}}</option>
+                                @endforeach
+        
+                            </select>
+                            @error('agama')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="nama" class="form-label">Tarikh Lahir</label>
+                            <input type="date" class="form-control" id="tarikhlahir" name="tarikh_lahir">
+                            @error('tarikhlahir')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
                             <label for="telefon" class="form-label">Telefon</label>
                             <input type="number" class="form-control" id="telefon" name="telefon">
                             @error('telefon')

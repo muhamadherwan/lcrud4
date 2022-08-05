@@ -6,6 +6,8 @@ use App\Http\Controllers\EmployeeController;
 
 use App\Http\Controllers\LoginController;
 
+use App\Http\Controllers\ReligionController;
+
 use App\Models\Employee;
 
 /*
@@ -59,3 +61,8 @@ Route::get('/register', [LoginController::class,'register'])->name('register');
 Route::post('/registerprocess', [LoginController::class,'registerprocess'])->name('registerprocess');
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+// agama
+Route::get('/religion', [ReligionController::class, 'index'])->name('religion')->middleware('auth');
+Route::get('/tambahagama', [ReligionController::class, 'create'])->name('tambahagama')->middleware('auth');
+Route::post('/insertagama', [ReligionController::class, 'store'])->name('insertagama')->middleware('auth');

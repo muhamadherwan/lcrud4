@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Employee;
 
+use App\Models\Religion;
+
 use Illuminate\Validation\Rule;
 
 use Illuminate\Support\Facades\Session;
@@ -37,7 +39,8 @@ class EmployeeController extends Controller
      */
     public function tambahpegawai()
     {
-        return view('tambahpegawai');
+        $dataagama = Religion::all();
+        return view('tambahpegawai', compact('dataagama'));
     }
 
     /**
@@ -58,14 +61,15 @@ class EmployeeController extends Controller
                 Rule::notIn(['0']),
             ],            
             'telefon' => 'required',
+            'image.*' => 'mimes:doc,pdf,docx,zip,jpeg,png,jpg,gif,svg',
         ]);
 
 
         $data = Employee::create($request->all());
 
-        $request->validate([
-            'image.*' => 'mimes:doc,pdf,docx,zip,jpeg,png,jpg,gif,svg',
-        ]);
+        // $request->validate([
+        //     'image.*' => 'mimes:doc,pdf,docx,zip,jpeg,png,jpg,gif,svg',
+        // ]);
 
         if ($request->hasFile('foto')) {
             // save the foto file in dir

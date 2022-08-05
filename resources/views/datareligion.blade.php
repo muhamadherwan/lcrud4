@@ -14,7 +14,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Data Pegawai</h1>
+                <h1 class="m-0">Data Agama</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -29,19 +29,13 @@
         <!-- Main content -->
         <div class="container">
         <div class="mb-2">
-            <a href="{{ route('tambahpegawai') }}" class="btn btn-success">Tambah +</a>             
+            <a href="{{ route('tambahagama') }}" class="btn btn-success">Tambah +</a>             
             <!-- {{ Session::get('halaman_url') }} -->
         </div>
 
-        <div class="row g-3 align-items-center mt-2">
-            <div class="col-auto">
-                <form action="/pegawai" method="get">
-                    <input type="search" name="search" class="form-control">
-                </form>
-            </div>
-        </div>
 
-        <div class="row">
+
+        <div class="row mt-5">
             <!-- @if ( $message = Session::get('success'))
                 <div class="alert alert-success" role="alert">
                 {{ $message }}
@@ -52,10 +46,6 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Nama</th>
-                        <th scope="col">Foto</th>
-                        <th scope="col">Jantina</th>
-                        <th scope="col">Agama</th>
-                        <th scope="col">Tarikh Lahir</th>
                         <th scope="col">Pendaftaran</th>
                         <th scope="col">Tindakan</th>
                     </tr>
@@ -69,27 +59,7 @@
                     <tr>
                         <th scope="row">{{ $no++ }}.</th>
                         <td>{{$row->nama}}</td>
-                        <!-- <td><img src="{{ asset('fotopegawai/'.$row->foto)}}" alt="" style="width: 40px;"></td> -->
-
-                        <td><img src="{{ asset('storage/images/'.$row->foto) }}" alt="" style="width: 40px;"></td>
                         
-                        <td>{{$row->jantina}}</td>  
-
-                        @if(isset($row->religions->nama)  && !empty($row->religions->nama))
-                            <td>{{ $row->religions->nama }}</td>                                  
-                        @else
-                            <td> - </td>
-                        @endif
-
-                        @if(isset($row->tarikh_lahir)  && !empty($row->tarikh_lahir))
-                            <td>{{ $row->tarikh_lahir->format('D M Y') }}</td>
-                        @else
-                            <td> - </td>
-                        @endif
-
-                        
-
-                        <td>{{$row->telefon}}</td>
                         <!-- <td>{{$row->created_at->diffForHumans()}}</td> -->
                         <td>{{$row->created_at->format('D M Y')}}</td>
                         <td>
@@ -108,7 +78,7 @@
                     @endforeach
                 </tbody>
             </table>
-            {{ $data->links() }}
+                 {{ $data->links() }}
         </div>
     </div>
 
